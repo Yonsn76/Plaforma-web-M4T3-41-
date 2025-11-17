@@ -1,0 +1,122 @@
+/* Theming with CSS variables to pair with Tailwind utilities */
+:root,
+.theme-dark {
+  --bg: #0b0e14;
+  --fg: #eef2ff;
+  --panel: rgba(255,255,255,0.06);
+  --panel-border: rgba(255,255,255,0.14);
+  --grad-a: #7c3aed; /* purple */
+  --grad-b: #ec4899; /* pink */
+  --ring: rgba(255,255,255,0.22);
+}
+
+.theme-light {
+  --bg: #f8fafc;
+  --fg: #0f172a;
+  --panel: rgba(255,255,255,0.7);
+  --panel-border: rgba(2,6,23,0.08);
+  --grad-a: #6366f1;
+  --grad-b: #22d3ee;
+  --ring: rgba(59,130,246,0.25);
+}
+
+.theme-pink {
+  --grad-a: #f472b6;
+  --grad-b: #ec4899;
+  --ring: rgba(244,114,182,0.35);
+}
+
+.theme-green {
+  --grad-a: #22c55e;
+  --grad-b: #10b981;
+  --ring: rgba(34,197,94,0.35);
+}
+
+.theme-red {
+  --grad-a: #ef4444;
+  --grad-b: #f97316;
+  --ring: rgba(239,68,68,0.35);
+}
+
+.theme-sky {
+  --grad-a: #38bdf8;
+  --grad-b: #22d3ee;
+  --ring: rgba(56,189,248,0.35);
+}
+
+/* Pretty nav pills compatible with Tailwind structure */
+.nav-pill {
+  text-decoration: none;
+  padding: .5rem .9rem;
+  border-radius: 999px;
+  border: 1px solid var(--panel-border);
+  background: color-mix(in lab, var(--panel), transparent 10%);
+  color: var(--fg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform .15s ease, background .2s ease, border-color .2s ease;
+  display: inline-flex; align-items: center; gap: .375rem;
+}
+.nav-pill:hover { transform: translateY(-1px); background: color-mix(in lab, var(--panel), white 4%); }
+.nav-pill.active { background: color-mix(in lab, var(--panel), white 8%); }
+
+/* Tiny colored dots for theme switcher */
+.theme-dot {
+  width: 22px; height: 22px; border-radius: 999px; border: 1px solid var(--panel-border);
+  background: linear-gradient(135deg, var(--grad-a), var(--grad-b));
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,.25);
+  display: inline-block;
+}
+.theme-dot:hover { filter: brightness(1.05); transform: translateY(-1px); transition: all .15s ease; }
+
+/* Glass panel */
+.glass {
+  background: linear-gradient(180deg, color-mix(in lab, var(--panel), transparent 10%), color-mix(in lab, var(--panel), transparent 0%));
+  border: 1px solid var(--panel-border);
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), 0 20px 60px rgba(0,0,0,0.35);
+}
+
+/* Background blobs like Cursor's site */
+.bg-blob {
+  position: fixed;
+  inset: -10% -10% 0 -10%;
+  z-index: -1;
+  filter: blur(60px) saturate(120%);
+  background:
+    radial-gradient(40% 35% at 10% 20%, color-mix(in lab, var(--grad-a), transparent 20%), transparent 60%),
+    radial-gradient(45% 40% at 90% 10%, color-mix(in lab, var(--grad-b), transparent 15%), transparent 60%),
+    radial-gradient(55% 45% at 50% 110%, color-mix(in lab, var(--grad-b), var(--grad-a) 50%), transparent 60%);
+  opacity: .9;
+}
+
+/* Auth slider */
+#authSlider {
+  transition: height .35s ease;
+}
+.auth-track {
+  width: 200%;
+  display: flex;
+  transition: transform .5s ease;
+}
+.auth-pane {
+  width: 50%;
+}
+
+/* Mobile tuning so colors/shapes don't deform */
+@media (max-width: 640px) {
+  .bg-blob {
+    inset: -30% -40% -10% -40%;
+    filter: blur(48px) saturate(110%);
+    opacity: .7;
+    background:
+      radial-gradient(55% 50% at 20% 10%, color-mix(in lab, var(--grad-a), transparent 25%), transparent 60%),
+      radial-gradient(60% 50% at 85% 0%, color-mix(in lab, var(--grad-b), transparent 25%), transparent 60%),
+      radial-gradient(70% 60% at 50% 110%, color-mix(in lab, var(--grad-b), var(--grad-a) 40%), transparent 65%);
+  }
+}
+
+/* Utility: ring color for inputs (used via Tailwind ring-[var(--ring)]) - nothing to add here, just documenting */
+
+/* Responsive helpers (kept minimal since Tailwind handles layout) */

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>M4T3 41 - Login</title>
+
+  <!-- Tailwind via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Inter", "ui-sans-serif", "system-ui"] }
+        }
+      }
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="theme-dark min-h-screen antialiased text-[var(--fg)] bg-[var(--bg)]">
+  <!-- Top bar -->
+  <header class="sticky top-0 z-30 bg-[color-mix(in_lab,var(--bg),transparent_10%)]/80 backdrop-blur border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="h-9 w-9 rounded-xl bg-gradient-to-br from-[var(--grad-a)] to-[var(--grad-b)] shadow-lg"></div>
+        <span class="font-extrabold tracking-wide text-lg">M4T3 41</span>
+      </div>
+
+      <nav class="hidden md:flex items-center gap-2" id="nav">
+        <a class="nav-pill active" href="#" data-section="Inicio">Inicio</a>
+        <a class="nav-pill" href="#" data-section="services">Services</a>
+        <a class="nav-pill" href="#" data-section="about">About us</a>
+        <a class="nav-pill" href="#" data-section="contact">Contact us</a>
+      </nav>
+
+      <!-- Theme switcher -->
+      <div class="flex items-center gap-2">
+        <button class="theme-dot" data-theme="light" title="Claro"></button>
+        <button class="theme-dot" data-theme="dark" title="Oscuro"></button>
+        <button class="theme-dot" data-theme="pink" title="Rosa"></button>
+        <button class="theme-dot" data-theme="green" title="Verde"></button>
+        <button class="theme-dot" data-theme="red" title="Rojo"></button>
+        <button class="theme-dot" data-theme="sky" title="Celeste"></button>
+        <button id="menuBtn" class="md:hidden nav-pill">Menu</button>
+      </div>
+    </div>
+
+    <!-- Mobile nav -->
+    <div id="mobileNav" class="md:hidden max-w-7xl mx-auto px-4 pb-4 hidden">
+      <nav class="flex flex-wrap gap-2">
+        <a class="nav-pill active" href="#" data-section="Inicio">Inicio</a>
+        <a class="nav-pill" href="#" data-section="services">Services</a>
+        <a class="nav-pill" href="#" data-section="about">About us</a>
+        <a class="nav-pill" href="#" data-section="contact">Contact us</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main class="relative">
+    <!-- Background blobs -->
+    <div class="bg-blob"></div>
+
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+        <!-- Left: typing area -->
+        <article class="glass p-6 sm:p-8 rounded-3xl min-h-[420px]">
+          <div id="type-area" class="space-y-4">
+            <p id="type-kicker" class="uppercase tracking-[.22em] text-xs font-extrabold opacity-90"></p>
+            <h1 id="type-title" class="text-4xl sm:text-5xl font-black min-h-[3rem]"></h1>
+            <div id="type-text" class="leading-8 opacity-95 space-y-2"></div>
+          </div>
+        </article>
+
+        <!-- Right: auth (Login / Registro) -->
+        <article class="glass p-6 sm:p-8 rounded-3xl">
+          <div class="flex justify-center gap-2 mb-6">
+            <button class="nav-pill auth-tab active" data-auth="login">Login</button>
+            <button class="nav-pill auth-tab" data-auth="register">Registro</button>
+          </div>
+
+          <div id="authSlider" class="relative overflow-hidden">
+            <div id="authTrack" class="auth-track">
+              <!-- Login -->
+              <form id="loginForm" class="auth-pane space-y-4 px-1">
+                 <label class="block">
+                   <span class="block text-sm font-medium/relaxed opacity-90">Email</span>
+                   <input id="login_user" name="correo" type="email" required placeholder="tucorreo@dominio.com"
+                          class="mt-2 w-full rounded-full bg-white/5 border border-white/20 px-4 py-3 outline-none text-inherit placeholder-white/70 focus:ring-4 ring-[var(--ring)]"/>
+                   <p class="field-error hidden text-xs text-red-400 mt-1"></p>
+                 </label>
+                 <label class="block relative">
+                   <span class="block text-sm font-medium/relaxed opacity-90">Contraseña</span>
+                   <input id="login_password" type="password" name="contrasena" required placeholder="********"
+                          class="mt-2 w-full rounded-full bg-white/5 border border-white/20 px-4 py-3 pr-20 outline-none text-inherit placeholder-white/70 focus:ring-4 ring-[var(--ring)]"/>
+                   <button type="button" class="pw-toggle absolute right-2 top-[calc(50%+0.25rem)] -translate-y-1/2 px-3 py-1 text-xs rounded-full bg-white/10 border border-white/20 hover:bg-white/20" data-target="login_password">Mostrar</button>
+                   <p class="field-error hidden text-xs text-red-400 mt-1"></p>
+                 </label>
+                <div class="pt-2 flex justify-center">
+                  <button type="submit"
+                          class="inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold bg-white text-neutral-900 hover:brightness-95 shadow-xl transition">
+                    Acceder
+                  </button>
+                </div>
+                <p class="text-center text-sm opacity-80">¿No tienes cuenta?
+                  <a href="#" class="underline auth-link" data-auth="register">Crear cuenta</a>
+                </p>
+              </form>
+
+               <!-- Registro -->
+               <form id="registerForm" class="auth-pane space-y-4 px-1">
+                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                   <label class="block">
+                     <span class="block text-sm font-medium/relaxed opacity-90">Nombre</span>
+                     <input id="reg_first" name="nombre" required placeholder="Nombre"
+                            class="mt-2 w-full rounded-full bg-white/5 border border-white/20 px-4 py-3 outline-none text-inherit placeholder-white/70 focus:ring-4 ring-[var(--ring)]"/>
+                     <p class="field-error hidden text-xs text-red-400 mt-1"></p>
+                   </label>
+                   <label class="block">
+                     <span class="block text-sm font-medium/relaxed opacity-90">Apellido</span>
+                     <input id="reg_last" name="apellido" required placeholder="Apellido"
+                            class="mt-2 w-full rounded-full bg-white/5 border border-white/20 px-4 py-3 outline-none text-inherit placeholder-white/70 focus:ring-4 ring-[var(--ring)]"/>
+                     <p class="field-error hidden text-xs text-red-400 mt-1"></p>
+                   </label>
+                 </div>
+                 <label class="block">
+                   <span class="block text-sm font-medium/relaxed opacity-90">Email</span>
+                   <input id="reg_email" type="email" name="correo" required placeholder="tucorreo@dominio.com"
+                          class="mt-2 w-full rounded-full bg-white/5 border border-white/20 px-4 py-3 outline-none text-inherit placeholder-white/70 focus:ring-4 ring-[var(--ring)]"/>
+                   <p class="field-error hidden text-xs text-red-400 mt-1"></p>
+                 </label>
+                 
+                 <!-- Rol -->
+                 <label class="block">
+                   <span class="block text-sm font-medium/relaxed opacity-90">Tipo de usuario</span>
+                   <select id="reg_rol" name="rol" required 
+                           class="mt-2 w-full rounded-full bg-white/5 border border-white/20 px-4 py-3 outline-none text-inherit focus:ring-4 ring-[var(--ring)]">
+                     <option value="">Selecciona tu rol</option>
+                     <option value="docente">Docente</option>
+                     <option value="alumno">Alumno</option>
+                   </select>
+                   <p class="field-error hidden text-xs text-red-400 mt-1"></p>
+                 </label>
+                 
+                 <!-- Especialidad (para docentes) -->
+                 <label class="block" id="especialidad-field" style="display: none;">
+                   <span class="block text-sm font-medium/relaxed opacity-90">Especialidad</span>
+                   <input id="reg_especialidad" name="especialidad" placeholder="Matemáticas, Física, etc."
+                          class="mt-2 w-full rounded-full bg-white/5 border border-white/20 px-4 py-3 outline-none text-inherit placeholder-white/70 focus:ring-4 ring-[var(--ring)]"/>
+                   <p class="field-error hidden text-xs text-red-400 mt-1"></p>
+                 </label>
+                 
+                 <!-- Grado (para alumnos) -->
+                 <label class="block" id="grado-field" style="display: none;">
+                   <span class="block text-sm font-medium/relaxed opacity-90">Grado</span>
+                   <select id="reg_grado" name="grado" 
+                           class="mt-2 w-full rounded-full bg-white/5 border border-white/20 px-4 py-3 outline-none text-inherit focus:ring-4 ring-[var(--ring)]">
+                     <option value="">Selecciona tu grado</option>
+                     <option value="1ro">1er Grado</option>
+                     <option value="2do">2do Grado</option>
+                     <option value="3ro">3er Grado</option>
+                     <option value="4to">4to Grado</option>
+                     <option value="5to">5to Grado</option>
+                     <option value="6to">6to Grado</option>
+                     <option value="1ro_sec">1ro Secundaria</option>
+                     <option value="2do_sec">2do Secundaria</option>
+                     <option value="3ro_sec">3ro Secundaria</option>
+                     <option value="4to_sec">4to Secundaria</option>
+                     <option value="5to_sec">5to Secundaria</option>
+                   </select>
+                   <p class="field-error hidden text-xs text-red-400 mt-1"></p>
+                 </label>
+                 <label class="block relative">
+                   <span class="block text-sm font-medium/relaxed opacity-90">Contraseña</span>
+                   <input id="reg_password" type="password" name="contrasena" required placeholder="Mínimo 6 caracteres"
+                          class="mt-2 w-full rounded-full bg-white/5 border border-white/20 px-4 py-3 pr-20 outline-none text-inherit placeholder-white/70 focus:ring-4 ring-[var(--ring)]"/>
+                   <button type="button" class="pw-toggle absolute right-2 top-[calc(50%+0.25rem)] -translate-y-1/2 px-3 py-1 text-xs rounded-full bg-white/10 border border-white/20 hover:bg-white/20" data-target="reg_password">Mostrar</button>
+                   <p class="field-error hidden text-xs text-red-400 mt-1"></p>
+                 </label>
+                 <label class="block relative">
+                   <span class="block text-sm font-medium/relaxed opacity-90">Confirmar contraseña</span>
+                   <input id="reg_password2" type="password" name="contrasena2" required placeholder="Repite la contraseña"
+                          class="mt-2 w-full rounded-full bg-white/5 border border-white/20 px-4 py-3 pr-20 outline-none text-inherit placeholder-white/70 focus:ring-4 ring-[var(--ring)]"/>
+                   <button type="button" class="pw-toggle absolute right-2 top-[calc(50%+0.25rem)] -translate-y-1/2 px-3 py-1 text-xs rounded-full bg-white/10 border border-white/20 hover:bg-white/20" data-target="reg_password2">Mostrar</button>
+                   <p class="field-error hidden text-xs text-red-400 mt-1"></p>
+                 </label>
+                <div class="pt-2 flex justify-center">
+                  <button type="submit"
+                          class="inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold bg-white text-neutral-900 hover:brightness-95 shadow-xl transition">
+                    Crear cuenta
+                  </button>
+                </div>
+                <p class="text-center text-sm opacity-80">¿Ya tienes cuenta?
+                  <a href="#" class="underline auth-link" data-auth="login">Inicia sesión</a>
+                </p>
+              </form>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="py-10 text-center text-sm opacity-70">
+    © 2025 M4T3 41
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

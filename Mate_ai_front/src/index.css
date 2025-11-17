@@ -1,0 +1,208 @@
+@import "tailwindcss";
+
+/* Theming with CSS variables - Inspired by Cursor.com */
+@layer base {
+  :root {
+    --bg: #0a0a0f;
+    --bg-secondary: #11111a;
+    --fg: 255 255 255;
+    --panel: rgba(255,255,255,0.06);
+    --panel-border: rgba(255,255,255,0.12);
+    --grad-a: 124 58 237;   /* violet-600 */
+    --grad-b: 168 85 247;   /* purple-500 */
+    --grad-c: 59 130 246;   /* blue-500 */
+    --ring: 124 58 237;
+    --accent: 139 92 246;   /* violet-500 */
+  }
+
+  html, body, #root {
+    height: 100%;
+    width: 100%;
+  }
+
+  body {
+    background: linear-gradient(135deg, #0a0a0f 0%, #11111a 50%, #0a0a0f 100%);
+    color: rgb(var(--fg));
+    overflow-x: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Themes - Cursor.com inspired */
+  .theme-dark {
+    --bg: #0a0a0f;
+    --bg-secondary: #11111a;
+    --fg: 255 255 255;
+    --panel: rgba(255,255,255,0.06);
+    --panel-border: rgba(255,255,255,0.12);
+    --grad-a: 124 58 237;
+    --grad-b: 168 85 247;
+    --grad-c: 59 130 246;
+    --ring: 124 58 237;
+    --accent: 139 92 246;
+  }
+  .theme-light {
+    --bg: #fafafa;
+    --bg-secondary: #ffffff;
+    --fg: 10 10 15;
+    --panel: rgba(255,255,255,0.9);
+    --panel-border: rgba(0,0,0,0.08);
+    --grad-a: 99 102 241;
+    --grad-b: 139 92 246;
+    --grad-c: 59 130 246;
+    --ring: 99 102 241;
+    --accent: 124 58 237;
+  }
+  .theme-pink {
+    --bg: #0f0a0f;
+    --bg-secondary: #1a111a;
+    --fg: 255 255 255;
+    --panel: rgba(255,255,255,0.06);
+    --panel-border: rgba(255,255,255,0.12);
+    --grad-a: 236 72 153;
+    --grad-b: 244 63 94;
+    --grad-c: 251 113 133;
+    --ring: 236 72 153;
+    --accent: 244 114 182;
+  }
+  .theme-green {
+    --bg: #0a0f0f;
+    --bg-secondary: #111a1a;
+    --fg: 255 255 255;
+    --panel: rgba(255,255,255,0.06);
+    --panel-border: rgba(255,255,255,0.12);
+    --grad-a: 34 197 94;
+    --grad-b: 16 185 129;
+    --grad-c: 6 182 212;
+    --ring: 34 197 94;
+    --accent: 52 211 153;
+  }
+  .theme-red {
+    --bg: #0f0a0a;
+    --bg-secondary: #1a1111;
+    --fg: 255 255 255;
+    --panel: rgba(255,255,255,0.06);
+    --panel-border: rgba(255,255,255,0.12);
+    --grad-a: 239 68 68;
+    --grad-b: 251 146 60;
+    --grad-c: 249 115 22;
+    --ring: 239 68 68;
+    --accent: 248 113 113;
+  }
+  .theme-sky {
+    --bg: #0a0a0f;
+    --bg-secondary: #11151a;
+    --fg: 255 255 255;
+    --panel: rgba(255,255,255,0.06);
+    --panel-border: rgba(255,255,255,0.12);
+    --grad-a: 14 165 233;
+    --grad-b: 59 130 246;
+    --grad-c: 99 102 241;
+    --ring: 14 165 233;
+    --accent: 56 189 248;
+  }
+}
+
+/* Utilities - Cursor.com style */
+@layer utilities {
+  .glass-card {
+    @apply rounded-2xl backdrop-blur-2xl shadow-2xl border;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 100%);
+    border-color: var(--panel-border);
+    color: rgb(var(--fg));
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(255, 255, 255, 0.2) 50%, 
+      transparent
+    );
+    opacity: 0.5;
+  }
+
+  .pill {
+    @apply rounded-full backdrop-blur-md border px-4 py-2;
+    background-color: var(--panel);
+    border-color: var(--panel-border);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, 
+      rgb(var(--grad-a)), 
+      rgb(var(--grad-b))
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-border {
+    position: relative;
+    border: 1px solid transparent;
+    background: linear-gradient(var(--bg), var(--bg)) padding-box,
+                linear-gradient(135deg, rgb(var(--grad-a)), rgb(var(--grad-b))) border-box;
+  }
+
+  .cursor-glow {
+    box-shadow: 0 0 20px rgba(var(--accent), 0.3),
+                0 0 40px rgba(var(--accent), 0.1);
+  }
+
+  /* Animated gradient background */
+  .animated-gradient {
+    background: linear-gradient(
+      135deg,
+      rgba(var(--grad-a), 0.1),
+      rgba(var(--grad-b), 0.1),
+      rgba(var(--grad-c), 0.1)
+    );
+    background-size: 200% 200%;
+    animation: gradient-shift 15s ease infinite;
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  /* Cursor-style button */
+  .btn-primary {
+    @apply px-6 py-3 rounded-xl font-semibold transition-all duration-200;
+    background: linear-gradient(135deg, rgb(var(--grad-a)), rgb(var(--grad-b)));
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 20px rgba(var(--accent), 0.3);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 30px rgba(var(--accent), 0.4);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+
+  /* Smooth transitions */
+  .smooth-transition {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
